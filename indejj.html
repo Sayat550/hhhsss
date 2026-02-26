@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="kk">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>8 Наурызға шақыру</title>
+  <style>
+    :root{
+      --bg1:#fff1f6;
+      --bg2:#f4f8ff;
+      --accent:#ff3b7a;
+      --accent2:#7a5cff;
+      --text:#1b1b1f;
+      --card:#ffffffcc;
+      --shadow: 0 18px 45px rgba(20,20,40,.12);
+      --radius: 22px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 700px at 15% 15%, var(--bg1), transparent 60%),
+        radial-gradient(1100px 650px at 85% 20%, #e9f0ff, transparent 60%),
+        radial-gradient(900px 600px at 50% 90%, var(--bg2), transparent 60%),
+        #fff;
+      min-height:100vh;
+      overflow-x:hidden;
+    }
+    .wrap{
+      max-width:980px;
+      margin:0 auto;
+      padding:28px 18px 60px;
+    }
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      flex-wrap:wrap;
+    }
+    .logo{
+      display:flex; align-items:center; gap:10px;
+      font-weight:700;
+      letter-spacing:.2px;
+    }
+    .badge{
+      display:inline-flex;
+      padding:8px 12px;
+      border-radius:999px;
+      background: linear-gradient(90deg, #ffe1ee, #e9e6ff);
+      border:1px solid rgba(0,0,0,.06);
+      font-size:13px;
+    }
+    .hero{
+      margin-top:22px;
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    @media (max-width: 860px){
+      .hero{grid-template-columns:1fr}
+    }
+    .card{
+      background:var(--card);
+      border:1px solid rgba(0,0,0,.07);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
+      padding:22px;
+      backdrop-filter: blur(8px);
+    }
+    h1{
+      margin:0 0 10px;
+      font-size:42px;
+      line-height:1.05;
+    }
+    @media (max-width: 420px){ h1{font-size:34px} }
+    .grad{
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+    .lead{
+      margin:10px 0 16px;
+      font-size:16px;
+      line-height:1.55;
+      opacity:.92;
+    }
+    .chips{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin:14px 0 18px;
+    }
+    .chip{
+      border-radius:999px;
+      padding:8px 12px;
+      border:1px solid rgba(0,0,0,.08);
+      background:#fff;
+      font-size:14px;
+      display:inline-flex; gap:8px; align-items:center;
+    }
+    .chip b{font-weight:700}
+    .actions{
+      display:flex; flex-wrap:wrap; gap:10px;
+      margin-top:12px;
+    }
+    .btn{
+      cursor:pointer;
+      border:0;
+      border-radius:14px;
+      padding:12px 14px;
+      font-weight:700;
+      font-size:14px;
+      transition:.15s transform, .15s filter;
+      display:inline-flex; align-items:center; gap:10px;
+      user-select:none;
+    }
+    .btn:hover{transform: translateY(-1px); filter:brightness(1.02)}
+    .btn:active{transform: translateY(0px); filter:brightness(.98)}
+    .primary{
+      color:white;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      box-shadow: 0 12px 25px rgba(255,59,122,.18);
+    }
+    .ghost{
+      background:#fff;
+      border:1px solid rgba(0,0,0,.10);
+    }
+    .right{
+      position:relative;
+      overflow:hidden;
+    }
+    .flower{
+      position:absolute;
+      inset:auto -50px -60px auto;
+      width:240px; height:240px;
+      opacity:.25;
+      transform: rotate(12deg);
+      filter: blur(.2px);
+      pointer-events:none;
+    }
+    .mini{
+      margin-top:8px;
+      opacity:.78;
+      font-size:13px;
+      line-height:1.45;
+    }
+    .grid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(3,1fr);
+      gap:12px;
+    }
+    @media (max-width: 860px){ .grid{grid-template-columns:1fr} }
+    .item h3{margin:0 0 6px; font-size:16px}
+    .item p{margin:0; opacity:.86; font-size:14px; line-height:1.5}
+    footer{
+      margin-top:18px;
+      opacity:.7;
+      font-size:13px;
+      text-align:center;
+    }
+    /* modal */
+    .modal{
+      position:fixed; inset:0;
+      display:none;
+      align-items:center; justify-content:center;
+      padding:18px;
+      background: rgba(15,15,25,.55);
+    }
+    .modal.open{display:flex}
+    .modal .box{
+      width:min(560px, 100%);
+      background:#fff;
+      border-radius:22px;
+      padding:18px;
+      box-shadow: 0 30px 70px rgba(0,0,0,.25);
+    }
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    @media (max-width:520px){ .row{grid-template-columns:1fr} }
+    label{font-size:13px; opacity:.85; display:block; margin:8px 0 6px}
+    input, textarea{
+      width:100%;
+      padding:12px 12px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,.12);
+      font:inherit;
+      outline:none;
+    }
+    textarea{min-height:90px; resize:vertical}
+    .modal .top{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:10px;
+      margin-bottom:8px;
+    }
+    .x{
+      width:40px; height:40px;
+      border-radius:14px;
+      border:1px solid rgba(0,0,0,.12);
+      background:#fff;
+      cursor:pointer;
+      font-weight:900;
+    }
+    .note{font-size:12px; opacity:.7; margin-top:8px}
+    /* floating hearts */
+    .heart{
+      position:fixed;
+      bottom:-30px;
+      font-size:18px;
+      pointer-events:none;
+      animation: fly 2.8s linear forwards;
+      opacity:.9;
+      filter: drop-shadow(0 10px 15px rgba(0,0,0,.10));
+    }
+    @keyframes fly{
+      to{
+        transform: translateY(-110vh) translateX(var(--dx)) rotate(25deg);
+        opacity:0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <span style="font-size:20px">🌷</span>
+        <span>8 Наурыз</span>
+      </div>
+      <div class="badge" id="today">Бүгін: —</div>
+    </header>
+
+    <section class="hero">
+      <div class="card">
+        <h1><span class="grad">8 Наурыз</span> мерекесіне шақыру 💐</h1>
+
+        <p class="lead" id="intro">
+          Құрметті <b id="toName">қонақ</b>, сізді Халықаралық әйелдер күніне арналған
+          жылы әрі шуақты кездесуге шын жүректен шақырамын. Кешіміз жайлы, әсем және
+          көтеріңкі көңіл-күйге толы болады ✨
+        </p>
+
+        <div class="chips">
+          <div class="chip">📅 <b id="dateText">8 наурыз</b></div>
+          <div class="chip">⏰ <b id="timeText">18:00</b></div>
+          <div class="chip">📍 <b id="placeText">Мектеп мәжіліс залы</b></div>
+        </div>
+
+        <div class="actions">
+          <button class="btn primary" id="btnRsvp">✅ Қатысатынымды растау</button>
+          <button class="btn ghost" id="btnCopy">📋 Шақыру мәтінін көшіру</button>
+          <button class="btn ghost" id="btnShare">🔗 Бөлісу</button>
+        </div>
+
+        <p class="mini">
+          
+        </p>
+      </div>
+
+      <div class="card right">
+        <svg class="flower" viewBox="0 0 200 200" aria-hidden="true">
+          <path d="M100 20c18 0 22 22 10 33 15-6 32 8 26 25-4 12-19 16-29 11 9 12 3 33-15 33-11 0-18-7-22-15-4 8-11 15-22 15-18 0-24-21-15-33-10 5-25 1-29-11-6-17 11-31 26-25-12-11-8-33 10-33 11 0 18 7 22 15 4-8 11-15 22-15z"
+                fill="url(#g)"/>
+          <defs>
+            <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#ff3b7a"/>
+              <stop offset="1" stop-color="#7a5cff"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        <h2 style="margin:0 0 10px; font-size:20px">Сізді не күтеді?</h2>
+
+        <div class="grid">
+          <div class="item">
+            <h3>🎁 Шағын сыйлық</h3>
+            <p>Жылы лебіздер мен көңілге қуаныш сыйлайтын шағын тосынсый.</p>
+          </div>
+          <div class="item">
+            <h3>🍰 Шай мен тәттілер</h3>
+            <p>Дәмді дастархан және жайлы атмосфера.</p>
+          </div>
+          <div class="item">
+            <h3>📸 Естелікке сурет</h3>
+            <p>Естелікке әдемі фотосуреттер.</p>
+          </div>
+     
+    </section>
+
+    <footer>
+      ❤️ 8 Наурызға арналған шақыру ❤️
+    </footer>
+  </div>
+
+  <!-- Modal RSVP -->
+  <div class="modal" id="modal">
+    <div class="box">
+      <div class="top">
+        <div>
+          <div style="font-weight:800; font-size:18px">Қатысуды растау (RSVP)</div>
+          <div style="opacity:.7; font-size:13px">Толтырыңыз — шақыру мәтіні жаңарады</div>
+        </div>
+        <button class="x" id="close">✕</button>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Кімге арналған (аты)</label>
+          <input id="inpName" placeholder="Мысалы: Құрметті ұстаздар" />
+        </div>
+        <div>
+          <label>Уақыты</label>
+          <input id="inpTime" placeholder="Мысалы: 15:00" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label>Күні</label>
+          <input id="inpDate" placeholder="Мысалы: 8 наурыз 2026" />
+        </div>
+        <div>
+          <label>Өтетін орны</label>
+          <input id="inpPlace" placeholder="Мысалы: №__ мектеп, акт залы" />
+        </div>
+      </div>
+
+      <label>Қосымша хабарлама (қалауыңызша)</label>
+      <textarea id="inpMsg" placeholder="Мысалы: Сіздерді қуана күтеміз!"></textarea>
+
+      <div class="actions" style="margin-top:12px">
+        <button class="btn primary" id="save">💾 Сақтау</button>
+        <button class="btn ghost" id="makeHearts">💗 Жүрекшелерді іске қосу</button>
+      </div>
+
+      <div class="note">
+        WhatsApp/Telegram-ға жіберу үшін: басты бетте «Бөлісу» батырмасын басыңыз.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ====== Әдепкі мәндер (қаласаңыз, осында өзгертіңіз) ======
+    const DEFAULTS = {
+      toName: "Есіміңіз",
+      dateText: "6 наурыз 2026",
+      timeText: "18:00",
+      placeText: "Ақ Отау restaurant, Сатпаев даңғылы 76/7",
+      extraMessage: ""
+    };
+
+    // ====== Көмекші функциялар ======
+    const $ = (id) => document.getElementById(id);
+    const state = { ...DEFAULTS };
+
+    function formatInviteText(){
+      const lines = [
+        `🌷 8 Наурыз мерекесіне шақыру 🌷`,
+        ``,
+        `Есімім ${state.toName}!`,
+        `8 Наурыз – Халықаралық әйелдер күніне арналған мерекелік кездесуге қатысамын.`,
+        ``,
+        `📅 Күні: ${state.dateText}`,
+        `⏰ Уақыты: ${state.timeText}`,
+        `📍 Өтетін орны: ${state.placeText}`
+      ];
+      if(state.extraMessage && state.extraMessage.trim()){
+        lines.push("", `💬 Қосымша: ${state.extraMessage.trim()}`);
+      }
+      lines.push("", `Қош келіңіз(дер)! 💐`);
+      return lines.join("\n");
+    }
+
+    function render(){
+      $("toName").textContent = state.toName || DEFAULTS.toName;
+      $("dateText").textContent = state.dateText || DEFAULTS.dateText;
+      $("timeText").textContent = state.timeText || DEFAULTS.timeText;
+      $("placeText").textContent = state.placeText || DEFAULTS.placeText;
+
+      const name = state.toName || DEFAULTS.toName;
+      $("intro").innerHTML =
+        ` <b>Ардақты ұстаздар</b>, сіздерді Халықаралық әйелдер күніне арналған
+        жылы әрі шуақты кездесуге шын жүректен шақырамын. Кешіміз жайлы, әсем және
+        көтеріңкі көңіл-күйге толы болады ✨`;
+    }
+
+    function escapeHtml(str){
+      return String(str).replace(/[&<>"']/g, s => ({
+        "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"
+      }[s]));
+    }
+
+    function setToday(){
+      const d = new Date();
+      const options = { year:"numeric", month:"long", day:"numeric" };
+      $("today").textContent = "Бүгін: " + d.toLocaleDateString("kk-KZ", options);
+    }
+
+    // ====== Жүрекшелер анимациясы ======
+    function popHearts(count = 16){
+      const emojis = ["💗","💖","💕","💝","💘","🌸","🌷"];
+      for(let i=0;i<count;i++){
+        const el = document.createElement("div");
+        el.className = "heart";
+        el.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+        el.style.left = Math.random()*100 + "vw";
+        el.style.setProperty("--dx", (Math.random()*200-100) + "px");
+        el.style.animationDuration = (2.2 + Math.random()*1.6) + "s";
+        el.style.fontSize = (16 + Math.random()*18) + "px";
+        document.body.appendChild(el);
+        setTimeout(()=> el.remove(), 4200);
+      }
+    }
+
+    // ====== Модаль ашу/жабу ======
+    const modal = $("modal");
+    function openModal(){
+      modal.classList.add("open");
+      $("inpName").value = state.toName;
+      $("inpDate").value = state.dateText;
+      $("inpTime").value = state.timeText;
+      $("inpPlace").value = state.placeText;
+      $("inpMsg").value = state.extraMessage;
+    }
+    function closeModal(){ modal.classList.remove("open"); }
+
+    // ====== Батырмалар әрекеті ======
+    $("btnRsvp").addEventListener("click", () => {
+      openModal();
+      popHearts(10);
+    });
+    $("close").addEventListener("click", closeModal);
+    modal.addEventListener("click", (e)=>{ if(e.target === modal) closeModal(); });
+
+    $("save").addEventListener("click", () => {
+      state.toName = $("inpName").value.trim() || DEFAULTS.toName;
+      state.dateText = $("inpDate").value.trim() || DEFAULTS.dateText;
+      state.timeText = $("inpTime").value.trim() || DEFAULTS.timeText;
+      state.placeText = $("inpPlace").value.trim() || DEFAULTS.placeText;
+      state.extraMessage = $("inpMsg").value.trim();
+
+      render();
+      popHearts(18);
+      closeModal();
+    });
+
+    $("makeHearts").addEventListener("click", () => popHearts(26));
+
+    $("btnCopy").addEventListener("click", async () => {
+      const text = formatInviteText();
+      try{
+        await navigator.clipboard.writeText(text);
+        popHearts(12);
+        alert("Шақыру мәтіні көшірілді ✅");
+      }catch{
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        popHearts(12);
+        alert("Шақыру мәтіні көшірілді ✅");
+      }
+    });
+
+    $("btnShare").addEventListener("click", async () => {
+      const text = formatInviteText();
+      const data = { title:"8 Наурызға шақыру", text };
+      if(navigator.share){
+        try{ await navigator.share(data); popHearts(12); }
+        catch{}
+      } else {
+        alert("Бұл құрылғыда «Бөлісу» функциясы қолдау таппады. «Көшіру» батырмасын басыңыз 🙂");
+      }
+    });
+
+    // init
+    setToday();
+    render();
+  </script>
+</body>
+</html>
